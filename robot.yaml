@@ -12,16 +12,6 @@ Children:
           default: '2'
           name: CAN ID
           validators: &id002 [CANID]
-          value: '11'
-      Base: CAN Talon
-      Name: RightMotor1
-    - Children: []
-      Properties:
-        CAN ID: !!robotbuilder.data.properties.ChoicesProperty
-          choices: *id001
-          default: '2'
-          name: CAN ID
-          validators: *id002
           value: '12'
       Base: CAN Talon
       Name: LeftMotor1
@@ -42,9 +32,39 @@ Children:
           default: '2'
           name: CAN ID
           validators: *id002
+          value: '16'
+      Base: CAN Talon
+      Name: LeftMotor3
+    - Children: []
+      Properties:
+        CAN ID: !!robotbuilder.data.properties.ChoicesProperty
+          choices: *id001
+          default: '2'
+          name: CAN ID
+          validators: *id002
+          value: '11'
+      Base: CAN Talon
+      Name: RightMotor1
+    - Children: []
+      Properties:
+        CAN ID: !!robotbuilder.data.properties.ChoicesProperty
+          choices: *id001
+          default: '2'
+          name: CAN ID
+          validators: *id002
           value: '13'
       Base: CAN Talon
       Name: RightMotor2
+    - Children: []
+      Properties:
+        CAN ID: !!robotbuilder.data.properties.ChoicesProperty
+          choices: *id001
+          default: '2'
+          name: CAN ID
+          validators: *id002
+          value: '15'
+      Base: CAN Talon
+      Name: RightMotor3
     Properties:
       Default command parameters: !!robotbuilder.data.properties.ParametersProperty
         default: []
