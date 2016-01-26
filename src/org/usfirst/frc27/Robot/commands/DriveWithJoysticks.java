@@ -5,13 +5,12 @@ import org.usfirst.frc27.Robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
  
-public class DriveWithJoystick extends Command 
+public class DriveWithJoysticks extends Command 
     { 
  
-    public DriveWithJoystick() 
+    public DriveWithJoysticks() 
         { 
         // Use requires() here to declare subsystem dependencies 
-        // eg. requires(chassis); 
         requires(Robot.driveTrain); 
         } 
  
@@ -23,10 +22,10 @@ public class DriveWithJoystick extends Command
  
     // Called repeatedly when this Command is scheduled to run 
     protected void execute() 
-        { 
-        //Robot.driveTrain.tankDrive(Robot.oi.get .getLeftDrivePower(), Robot.oi.getRightJoystick_XAxis()); 
-        } 
- 
+    {
+    	Robot.driveTrain.takeJoystickInputs(Robot.oi.getLeftJoystick(), Robot.oi.getRightJoystick());
+    }
+    
     // Make this return true when this Command no longer needs to run execute() 
     protected boolean isFinished() 
         { 
