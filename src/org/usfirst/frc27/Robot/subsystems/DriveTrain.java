@@ -50,9 +50,12 @@ public class DriveTrain extends Subsystem {
         // Set the default command for a subsystem here.
         // setDefaultCommand(new MySpecialCommand());
     }
+
+	public void stop() {
+		//leftMotor1.set
+		
+	}
     
-    public void forward() {
-    	rightMotor1.getDeviceID();
-    }
+
 }
 
