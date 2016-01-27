@@ -42,20 +42,21 @@ public class DriveTrain extends Subsystem {
     public DriveTrain()
     {
     	robotDrive = new RobotDrive(_leftMaster, _rightMaster);
-    	robotDrive.setInvertedMotor(RobotDrive.MotorType.kFrontRight, true);
+    	robotDrive.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);
+    	robotDrive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
     	
     	//Slave2's are commented because we are on the kitbot, which only has 2
     	//motors per side.  In production, we will use 3 motors per side.
     	
     	_leftSlave1.changeControlMode(TalonControlMode.Follower);
-    	//_leftSlave2.changeControlMode(TalonControlMode.Follower);
+    	_leftSlave2.changeControlMode(TalonControlMode.Follower);
     	_rightSlave1.changeControlMode(TalonControlMode.Follower);
-    	//_rightSlave2.changeControlMode(TalonControlMode.Follower);
+    	_rightSlave2.changeControlMode(TalonControlMode.Follower);
     	
     	_leftSlave1.set(_leftMaster.getDeviceID());
-    	//_leftSlave2.set(_leftMaster.getDeviceID());
+    	_leftSlave2.set(_leftMaster.getDeviceID());
     	_rightSlave1.set(_rightMaster.getDeviceID());
-    	//_rightSlave2.set(_rightMaster.getDeviceID());
+    	_rightSlave2.set(_rightMaster.getDeviceID());
     	
     }
 
