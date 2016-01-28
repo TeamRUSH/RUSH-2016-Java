@@ -80,7 +80,5 @@ public class DriveTrain extends Subsystem {
 	{	
 		robotDrive.tankDrive(0, 0);
 	}
-    
-
 }
 
