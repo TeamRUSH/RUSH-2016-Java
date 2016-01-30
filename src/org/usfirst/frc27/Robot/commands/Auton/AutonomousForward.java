@@ -45,7 +45,11 @@ public class AutonomousForward extends CommandGroup {
         // arm.
     	
     	//Normal
+    	addSequential(new Drive(-0.3, 1));
     	addSequential(new Drive(0.3, 1));
+    	addSequential(new Drive(-0.3, 1));
+    	addSequential(new Drive(0.3, 1));
+    	addSequential(new Drive(-0.3, 1));
     	
     }
 }

@@ -18,8 +18,10 @@ import org.usfirst.frc27.Robot.commands.DriveTrain.DriveWithJoysticks;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Joystick.AxisType;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 /**
@@ -36,7 +38,7 @@ public class DriveTrain extends Subsystem {
 
     private final RobotDrive robotDrive;  
 
-	double sensitivity = 1;
+	double sensitivity = 0.5;
     
     public DriveTrain()
     {
@@ -82,7 +84,11 @@ public class DriveTrain extends Subsystem {
     
     public void takeJoystickInputs(Joystick leftJoystick, Joystick rightJoystick)
     {
-    	robotDrive.tankDrive(leftJoystick, rightJoystick);
+    	//robotDrive.tankDrive(leftJoystick, rightJoystick);
+    	SmartDashboard.putNumber("Sensitivity", 1-leftJoystick.getAxis(AxisType.kZ));
+    	sensitivity = 1-leftJoystick.getAxis(AxisType.kZ);
+    	robotDrive.tankDrive(leftJoystick.getAxis(AxisType.kY)*sensitivity, rightJoystick.getAxis(AxisType.kY)*sensitivity);
+    	
     }
     
         
