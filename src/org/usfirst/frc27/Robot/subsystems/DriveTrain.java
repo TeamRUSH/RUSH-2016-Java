@@ -14,7 +14,7 @@ package org.usfirst.frc27.Robot.subsystems;
 import org.usfirst.frc27.Robot.RobotMap;
 import org.usfirst.frc27.Robot.commands.*;
 import org.usfirst.frc27.Robot.commands.DriveTrain.DriveWithJoysticks;
-
+import org.usfirst.frc27.Robot.Robot;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.Joystick;
@@ -55,6 +55,7 @@ public class DriveTrain extends Subsystem {
     	_leftSlave2.set(_leftMaster.getDeviceID());
     	_rightSlave1.set(_rightMaster.getDeviceID());
     	_rightSlave2.set(_rightMaster.getDeviceID());
+    	
     	
     }
 
@@ -130,5 +131,14 @@ public class DriveTrain extends Subsystem {
     public void rotate(){
     	
     }
+    public double getRobotHeading(){
+    	return Robot.ahrs.getAngle();
+    }
+
+	public void resetHeading() {
+		Robot.ahrs.reset();
+		// TODO Auto-generated method stub
+		
+	}
 }
 
