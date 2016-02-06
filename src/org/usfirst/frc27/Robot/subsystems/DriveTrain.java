@@ -13,7 +13,9 @@ package org.usfirst.frc27.Robot.subsystems;
 
 import org.usfirst.frc27.Robot.RobotMap;
 import org.usfirst.frc27.Robot.commands.*;
+import org.usfirst.frc27.Robot.commands.DriveTrain.Drive;
 import org.usfirst.frc27.Robot.commands.DriveTrain.DriveWithJoysticks;
+import org.usfirst.frc27.Robot.commands.DriveTrain.Turn;
 import org.usfirst.frc27.Robot.Robot;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
@@ -48,15 +50,13 @@ public class DriveTrain extends Subsystem {
     	robotDrive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
     	    	
     	_leftSlave1.changeControlMode(TalonControlMode.Follower);
-    	_leftSlave2.changeControlMode(TalonControlMode.Follower);
-    	_rightSlave1.changeControlMode(TalonControlMode.Follower);
-    	_rightSlave2.changeControlMode(TalonControlMode.Follower);
-    	
     	_leftSlave1.set(_leftMaster.getDeviceID());
+    	_leftSlave2.changeControlMode(TalonControlMode.Follower);
     	_leftSlave2.set(_leftMaster.getDeviceID());
+    	_rightSlave1.changeControlMode(TalonControlMode.Follower);
     	_rightSlave1.set(_rightMaster.getDeviceID());
-    	_rightSlave2.set(_rightMaster.getDeviceID());
-    	
+    	_rightSlave2.changeControlMode(TalonControlMode.Follower);
+       	_rightSlave2.set(_rightMaster.getDeviceID());
     	
     }
 
@@ -130,15 +130,10 @@ public class DriveTrain extends Subsystem {
     	//System.out.println("left: "+leftMotorSpeed+"--- right: "+rightMotorSpeed);
     }
     
-    public void rotate(){
+    public void rotate(int Goal, int Power){
+    	
     	
     }
-    
-    public double getArmPosition() {
-    	return _leftMaster.getAnalogInPosition();
-    }
-    
-    
     
     public double getRobotHeading(){
     	return Robot.ahrs.getAngle();

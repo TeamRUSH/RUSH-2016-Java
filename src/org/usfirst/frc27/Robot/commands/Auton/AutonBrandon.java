@@ -46,11 +46,11 @@ public class AutonBrandon extends CommandGroup {
         // arm.
     	
     	//Normal
-    	addSequential(new Turn(0.5, 2, Robot.TURN_LEFT));
-    	addSequential(new Drive(0.3, 1));
-    	addSequential(new Turn(0.8, 2, Robot.TURN_RIGHT));
-    	addSequential(new Drive(0.4, 1));
-    	addSequential(new Drive(-0.4, 1));
+    	
+    	//addSequential(new Turn(0.5, 2, Robot.TURN_LEFT));
+    	//addSequential(new Drive(0.3, 1));
+    	//addSequential(new Drive(0.4, 1));
+    	//addSequential(new Drive(-0.4, 1));
     	
     }
 }
