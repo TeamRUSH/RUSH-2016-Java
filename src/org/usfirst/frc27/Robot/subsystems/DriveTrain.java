@@ -23,7 +23,6 @@ import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-
 /**
  *
  */
@@ -43,7 +42,9 @@ public class DriveTrain extends Subsystem {
     public DriveTrain()
     {
     	robotDrive = new RobotDrive(_leftMaster, _rightMaster);
-    	robotDrive.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);
+  
+    	//Invert the appropriate controllers
+    	//robotDrive.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);
     	robotDrive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
     	    	
     	_leftSlave1.changeControlMode(TalonControlMode.Follower);
