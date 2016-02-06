@@ -13,20 +13,23 @@ package org.usfirst.frc27.Robot.subsystems;
 
 import org.usfirst.frc27.Robot.RobotMap;
 import org.usfirst.frc27.Robot.commands.*;
+import org.usfirst.frc27.Robot.commands.DriveTrain.Drive;
 import org.usfirst.frc27.Robot.commands.DriveTrain.DriveWithJoysticks;
+import org.usfirst.frc27.Robot.commands.DriveTrain.Turn;
 import org.usfirst.frc27.Robot.Robot;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Joystick.AxisType;
 import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
  */
-public class DriveTrain extends Subsystem {
+public class DriveTrain extends PIDSubsystem {
 
     private final CANTalon _leftMaster = RobotMap.driveTrainLeftMotor1;
     private final CANTalon _leftSlave1 = RobotMap.driveTrainLeftMotor2;
@@ -38,9 +41,12 @@ public class DriveTrain extends Subsystem {
     private final RobotDrive robotDrive;  
 
 	double sensitivity = 0.5;
-    
+
     public DriveTrain()
     {
+    	// super supplies the PID constants (.05, 0, 0)
+    	super("DriveTrain", .05, 0, 0);
+    	
     	robotDrive = new RobotDrive(_leftMaster, _rightMaster);
   
     	//Invert the appropriate controllers
@@ -48,21 +54,19 @@ public class DriveTrain extends Subsystem {
     	robotDrive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
     	    	
     	_leftSlave1.changeControlMode(TalonControlMode.Follower);
-    	_leftSlave2.changeControlMode(TalonControlMode.Follower);
-    	_rightSlave1.changeControlMode(TalonControlMode.Follower);
-    	_rightSlave2.changeControlMode(TalonControlMode.Follower);
-    	
     	_leftSlave1.set(_leftMaster.getDeviceID());
+    	_leftSlave2.changeControlMode(TalonControlMode.Follower);
     	_leftSlave2.set(_leftMaster.getDeviceID());
+    	_rightSlave1.changeControlMode(TalonControlMode.Follower);
     	_rightSlave1.set(_rightMaster.getDeviceID());
-    	_rightSlave2.set(_rightMaster.getDeviceID());
-    	
+    	_rightSlave2.changeControlMode(TalonControlMode.Follower);
+       	_rightSlave2.set(_rightMaster.getDeviceID());
     	
     }
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
-
+    
     public void initDefaultCommand() 
     { 
 	    // Set the default command for a subsystem here. 
@@ -99,6 +103,7 @@ public class DriveTrain extends Subsystem {
     }
     
     
+   
     public void drive(double xSpeed, double ySpeed, double yThrottle) {
     	//myRobot.arcadeDrive(sensorIRX(ai.getVoltage(), ySpeed)*yThrottle, sensorIRY(ai.getVoltage(), xSpeed)*yThrottle, true);
     	robotDrive.arcadeDrive(ySpeed*yThrottle*sensitivity, xSpeed*yThrottle*sensitivity);
@@ -130,7 +135,8 @@ public class DriveTrain extends Subsystem {
     	//System.out.println("left: "+leftMotorSpeed+"--- right: "+rightMotorSpeed);
     }
     
-    public void rotate(){
+    public void rotate(int Goal, int Power){
+    	
     	
     }
     
@@ -139,13 +145,24 @@ public class DriveTrain extends Subsystem {
     }
     
     
-    
     public double getRobotHeading(){
     	return Robot.ahrs.getAngle();
     }
 
 	public void resetHeading() {
 		Robot.ahrs.reset();
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected double returnPIDInput() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	protected void usePIDOutput(double output) {
 		// TODO Auto-generated method stub
 		
 	}
