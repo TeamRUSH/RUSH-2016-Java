@@ -129,9 +129,17 @@ public class DriveTrain extends Subsystem {
     	robotDrive.tankDrive(leftMotorSpeed*sensitivity, rightMotorSpeed*sensitivity);
     	//System.out.println("left: "+leftMotorSpeed+"--- right: "+rightMotorSpeed);
     }
+    
     public void rotate(){
     	
     }
+    
+    public double getArmPosition() {
+    	return _leftMaster.getAnalogInPosition();
+    }
+    
+    
+    
     public double getRobotHeading(){
     	return Robot.ahrs.getAngle();
     }
