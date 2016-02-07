@@ -140,11 +140,14 @@ public class DriveTrain extends PIDSubsystem {
     	
     }
     
+<<<<<<< HEAD
     public double getArmPosition() {
     	return _leftMaster.getAnalogInPosition();
     }
     
     
+=======
+>>>>>>> refs/remotes/origin/master
     public double getRobotHeading(){
     	return Robot.ahrs.getAngle();
     }

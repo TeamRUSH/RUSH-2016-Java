@@ -44,6 +44,7 @@ public class Robot extends IterativeRobot {
     public static DriveTrain driveTrain;
     public static Shooter shooter;
     public static BallDelivery ballDelivery;
+    public static Arm arm;
     public static final int TURN_LEFT = 0;
     public static final int TURN_RIGHT = 1;
 
@@ -59,6 +60,7 @@ public class Robot extends IterativeRobot {
         driveTrain = new DriveTrain();
         shooter = new Shooter();
         ballDelivery = new BallDelivery();
+        arm = new Arm();
         try {
             /* Communicate w/navX MXP via the MXP SPI Bus.                                     
             Alternatively:  I2C.Port.kMXP, SerialPort.Port.kMXP or SerialPort.Port.kUSB     
@@ -120,6 +122,7 @@ public class Robot extends IterativeRobot {
         // continue until interrupted by another command, remove
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
+        
     }
 
     /**

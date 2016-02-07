@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 import org.usfirst.frc27.Robot.Robot;
 import org.usfirst.frc27.Robot.commands.DriveTrain.Drive;
+import org.usfirst.frc27.Robot.commands.DriveTrain.Turn;
 
 /**
  *
@@ -47,6 +48,7 @@ public class AutonomousForward extends CommandGroup {
     	//Normal
     	addSequential(new Drive(-0.3, 1));
     	addSequential(new Drive(0.3, 1));
+    	addSequential(new Turn(0.8, 2, Robot.TURN_RIGHT));
     	addSequential(new Drive(-0.3, 1));
     	addSequential(new Drive(0.3, 1));
     	addSequential(new Drive(-0.3, 1));
