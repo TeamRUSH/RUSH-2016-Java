@@ -143,10 +143,7 @@ public class DriveTrain extends PIDSubsystem {
     }
     
     
-<<<<<<< HEAD
 
-=======
->>>>>>> refs/heads/Carson
     public double getRobotHeading(){
     	return Robot.ahrs.getAngle();
     }
