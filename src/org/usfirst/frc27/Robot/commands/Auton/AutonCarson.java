@@ -25,9 +25,9 @@ import org.usfirst.frc27.Robot.commands.DriveTrain.Turn;
 /**
  *
  */
-public class AutonBrandon extends CommandGroup {
+public class AutonCarson extends CommandGroup {
     
-    public  AutonBrandon() {
+    public  AutonCarson() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
@@ -46,10 +46,13 @@ public class AutonBrandon extends CommandGroup {
     	
     	//Normal
     	
-    	//addSequential(new Turn(0.5, 2, Robot.TURN_LEFT));
-    	//addSequential(new Drive(0.3, 1));
-    	//addSequential(new Drive(0.4, 1));
-    	//addSequential(new Drive(-0.4, 1));
+    	addSequential(new Turn(0.5, 2, Robot.TURN_LEFT));
+    	addSequential(new Drive(0.3, 1));
+    	addSequential(new Turn(0.5, 2, Robot.TURN_RIGHT));
+    	addSequential(new Drive(-0.4, 1));
+    	addSequential(new Turn(0.5, 5, Robot.TURN_LEFT));
+    	addSequential(new Turn(0.3, 8, Robot.TURN_RIGHT));
+    	
     	
     }
 }
