@@ -138,6 +138,10 @@ public class DriveTrain extends Subsystem {
     public double getRobotHeading(){
     	return Robot.ahrs.getAngle();
     }
+    
+    public double getArmPosition(){
+    	return RobotMap.arm.getAnalogInPosition();
+    }
 
 	public void resetHeading() {
 		Robot.ahrs.reset();
