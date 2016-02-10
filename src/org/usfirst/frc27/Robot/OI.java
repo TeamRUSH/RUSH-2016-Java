@@ -89,13 +89,12 @@ public class OI {
         bumper_Left.whileHeld(new AutonNoMovement());
         button_Y = new JoystickButton(leftJoystick, 4);
         button_Y.whileHeld(new AutonNoMovement());
-        button_B = new JoystickButton(leftJoystick, 3);
-        button_B.whileHeld(new AutonNoMovement());
         logitech_button_A = new JoystickButton(logitechPad, 2);
         logitech_button_A.whileHeld(new PneumaticTest());
-        button_X = new JoystickButton(leftJoystick, 1);
-        button_X.whenPressed(new AutonNoMovement());
-
+        button_X = new JoystickButton(logitechPad, 1);
+        button_X.whenPressed(new ArmToDrivePosition());
+        button_B = new JoystickButton(logitechPad, 3);
+        button_B.whenPressed(new ArmToUpPosition());
         // SmartDashboard Buttons
         SmartDashboard.putData("Autonomous Command", new AutonNoMovement());
 

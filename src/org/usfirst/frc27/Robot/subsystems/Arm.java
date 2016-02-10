@@ -18,35 +18,45 @@ import org.usfirst.frc27.Robot.commands.DriveTrain.DriveWithJoysticks;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Joystick.AxisType;
-import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 /**
  *
  */
-public class Arm extends Subsystem {
-
-   
-    private final CANTalon arm = RobotMap.arm;
- 
+public class Arm extends PIDSubsystem {
+	
+	private final CANTalon armMotor = RobotMap.armMotor;
+	
+	public Arm() {
+		super("Arm", .01, 0, 0);
+		getPIDController().setContinuous(false);
+		setSetpoint(90);
+		enable();
+	}
+	
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 
     public void initDefaultCommand() {
       
         // Set the default command for a subsystem here.
-        setDefaultCommand(new ActivateArm());
+        //setDefaultCommand(new ActivateArm());
     }
 
-    public void armOn() {
-    	arm.set(Robot.oi.rightJoystick.getAxis(AxisType.kZ));    
-    	SmartDashboard.putNumber("Arm", 1);
-    }
 
-    public void armOff() {
-    	arm.set(0);
-    }
+	@Override
+	protected double returnPIDInput() {
+		// TODO Auto-generated method stub
+		return armMotor.getAnalogInPosition();
+	}
+
+	@Override
+	protected void usePIDOutput(double output) {
+		// TODO Auto-generated method stub
+		armMotor.pidWrite(output);
+	}
 
 }
 

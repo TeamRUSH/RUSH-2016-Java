@@ -6,10 +6,10 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
  
-public class ActivateArm extends Command 
+public class ArmToUpPosition extends Command 
     { 
  
-    public ActivateArm() 
+    public ArmToUpPosition() 
         { 
         // Use requires() here to declare subsystem dependencies 
         requires(Robot.arm); 
@@ -18,26 +18,26 @@ public class ActivateArm extends Command
     // Called just before this Command runs the first time 
     protected void initialize() 
         { 
-         
+         	Robot.arm.setSetpoint(800);
         } 
  
     // Called repeatedly when this Command is scheduled to run 
     protected void execute()
     {
-    	Robot.arm.armOn();
+    	//Robot.arm.armOn();
     	//SmartDashboard.putNumber("EncoderTest", Robot.driveTrain.getArmPosition());
     }
     
     // Make this return true when this Command no longer needs to run execute() 
     protected boolean isFinished() 
         { 
-        return false; 
+        return Math.abs(Robot.arm.getSetpoint() - Robot.arm.getPosition()) < .1; 
         } 
  
     // Called once after isFinished returns true 
     protected void end() 
         { 
-        Robot.arm.armOff(); 
+        //Robot.arm.armOff(); 
         } 
  
     // Called when another command which requires one or more of the same 

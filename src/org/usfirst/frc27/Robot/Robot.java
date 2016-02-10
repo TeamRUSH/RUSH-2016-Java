@@ -61,6 +61,7 @@ public class Robot extends IterativeRobot {
         shooter = new Shooter();
         ballDelivery = new BallDelivery();
         arm = new Arm();
+        
         try {
             /* Communicate w/navX MXP via the MXP SPI Bus.                                     
             Alternatively:  I2C.Port.kMXP, SerialPort.Port.kMXP or SerialPort.Port.kUSB     

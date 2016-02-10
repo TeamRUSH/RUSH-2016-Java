@@ -94,7 +94,6 @@ public class DriveTrain extends PIDSubsystem {
     	SmartDashboard.putNumber("Sensitivity", 1-leftJoystick.getAxis(AxisType.kZ));
     	sensitivity = 1-leftJoystick.getAxis(AxisType.kZ);
     	robotDrive.tankDrive(leftJoystick.getAxis(AxisType.kY)*sensitivity, rightJoystick.getAxis(AxisType.kY)*sensitivity);
-    	
     }
     
         
@@ -136,18 +135,15 @@ public class DriveTrain extends PIDSubsystem {
     }
     
     public void rotate(int Goal, int Power){
-    	
-    	
+   	
     }
     
-<<<<<<< HEAD
     public double getArmPosition() {
     	return _leftMaster.getAnalogInPosition();
     }
     
     
-=======
->>>>>>> refs/remotes/origin/master
+
     public double getRobotHeading(){
     	return Robot.ahrs.getAngle();
     }
