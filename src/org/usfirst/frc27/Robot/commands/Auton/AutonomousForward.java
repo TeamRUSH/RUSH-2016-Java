@@ -13,14 +13,16 @@ package org.usfirst.frc27.Robot.commands.Auton;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc27.Robot.Robot;
 import org.usfirst.frc27.Robot.commands.DriveTrain.Drive;
 import org.usfirst.frc27.Robot.commands.DriveTrain.Turn;
+import org.usfirst.frc27.Robot.commands.DriveTrain.TurnWithHeading;
 
 /**
  *
- */
+ 
 
 /**
  *
@@ -43,15 +45,14 @@ public class AutonomousForward extends CommandGroup {
         // would require.
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
-        // arm.
+    	
+        // SmartDashboard.getNumber("Turn To x Degree"
     	
     	//Normal
-    	addSequential(new Drive(-0.3, 1));
-    	addSequential(new Drive(0.3, 1));
-    	addSequential(new Turn(0.8, 2, Robot.TURN_RIGHT));
-    	addSequential(new Drive(-0.3, 1));
-    	addSequential(new Drive(0.3, 1));
-    	addSequential(new Drive(-0.3, 1));
+    	//addSequential(new Drive(.4, 2));
+    	addSequential(new TurnWithHeading(0.5, 60, Robot.TURN_RIGHT));
+    	//addSequential(new TurnWithHeading(.5, 120, Robot.TURN_LEFT));
+    	//addSequential(new Drive(-.4, 2));
     	
     }
 }

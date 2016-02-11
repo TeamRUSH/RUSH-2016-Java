@@ -147,6 +147,10 @@ public class DriveTrain extends PIDSubsystem {
     public double getRobotHeading(){
     	return Robot.ahrs.getAngle();
     }
+    
+    public double getArmPosition(){
+    	return RobotMap.arm.getAnalogInPosition();
+    }
 
 	public void resetHeading() {
 		Robot.ahrs.reset();
