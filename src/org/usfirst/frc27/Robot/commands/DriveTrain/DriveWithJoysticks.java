@@ -26,7 +26,7 @@ public class DriveWithJoysticks extends Command
     {
     	Robot.driveTrain.takeJoystickInputs(Robot.oi.getLeftJoystick(), Robot.oi.getRightJoystick());
     	SmartDashboard.putNumber("Heading", Robot.driveTrain.getRobotHeading());
-    	SmartDashboard.putNumber("EncoderTest", Robot.driveTrain.getArmPosition());
+    	//SmartDashboard.putNumber("EncoderTest", Robot.driveTrain.getArmPosition());
     }
     
     // Make this return true when this Command no longer needs to run execute() 

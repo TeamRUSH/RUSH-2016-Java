@@ -4,6 +4,7 @@ package org.usfirst.frc27.Robot;
 
 import org.usfirst.frc27.Robot.commands.*;
 import org.usfirst.frc27.Robot.commands.Auton.AutonNoMovement;
+import org.usfirst.frc27.Robot.commands.DriveTrain.TurnHeading;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
@@ -87,18 +88,19 @@ public class OI {
         bumper_Right.whileHeld(new AutonNoMovement());
         bumper_Left = new JoystickButton(leftJoystick, 5);
         bumper_Left.whileHeld(new AutonNoMovement());
-        button_Y = new JoystickButton(leftJoystick, 4);
-        button_Y.whileHeld(new AutonNoMovement());
+
         logitech_button_A = new JoystickButton(logitechPad, 2);
         logitech_button_A.whileHeld(new PneumaticTest());
         button_X = new JoystickButton(logitechPad, 1);
         button_X.whenPressed(new ArmToDrivePosition());
         button_B = new JoystickButton(logitechPad, 3);
         button_B.whenPressed(new ArmToUpPosition());
+        button_Y = new JoystickButton(logitechPad, 4);
+        button_Y.whenPressed(new TurnHeading(90));
+
         // SmartDashboard Buttons
         SmartDashboard.putData("Autonomous Command", new AutonNoMovement());
 
-   
     }
 
     
@@ -112,10 +114,7 @@ public class OI {
 
     public Joystick getLogitechPad() {
         return logitechPad;
-    }
-    
-   
-    
+    }    
     
 }
 

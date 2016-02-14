@@ -16,11 +16,15 @@ import org.usfirst.frc27.Robot.commands.*;
 import org.usfirst.frc27.Robot.commands.DriveTrain.Drive;
 import org.usfirst.frc27.Robot.commands.DriveTrain.DriveWithJoysticks;
 import org.usfirst.frc27.Robot.commands.DriveTrain.Turn;
+
+import com.kauailabs.navx.frc.AHRS;
+
 import org.usfirst.frc27.Robot.Robot;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Joystick.AxisType;
+import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -41,11 +45,20 @@ public class DriveTrain extends PIDSubsystem {
     private final RobotDrive robotDrive;  
 
 	double sensitivity = 0.5;
+	
+	AHRS ahrs;
 
+	//The turnController will use the NavX board (via ahrs object) as input.
+	//It will also use the built-in PIDController that comes with the PIDSubsyste.
+	PIDController turnController;
+	
+	//The distanceController will use an encoder connected to the robot wheels as input.
+	//PIDController distanceController = new PIDController(.03, 0, 0, );
+	
     public DriveTrain()
     {
     	// super supplies the PID constants (.05, 0, 0)
-    	super("DriveTrain", .05, 0, 0);
+    	super("DriveTrain", .03, 0, 0);
     	
     	robotDrive = new RobotDrive(_leftMaster, _rightMaster);
   
@@ -61,7 +74,14 @@ public class DriveTrain extends PIDSubsystem {
     	_rightSlave1.set(_rightMaster.getDeviceID());
     	_rightSlave2.changeControlMode(TalonControlMode.Follower);
        	_rightSlave2.set(_rightMaster.getDeviceID());
-    	
+
+       	ahrs = Robot.ahrs;
+       	
+       	//getPIDController() returns the PID Controller that is included with 
+       	//classes that extend PIDSubsystems.
+       	turnController = getPIDController();
+       	turnController.disable();
+       	
     }
 
     // Put methods for controlling this subsystem
@@ -74,6 +94,7 @@ public class DriveTrain extends PIDSubsystem {
     } 
 
     public void stop(){
+    	turnController.disable();
     	robotDrive.drive(0, 0);
     }
 
@@ -101,14 +122,19 @@ public class DriveTrain extends PIDSubsystem {
     	robotDrive.tankDrive(speedLeft*sensitivity, speedRight*sensitivity);
     }
     
-    
-   
+       
     public void drive(double xSpeed, double ySpeed, double yThrottle) {
     	//myRobot.arcadeDrive(sensorIRX(ai.getVoltage(), ySpeed)*yThrottle, sensorIRY(ai.getVoltage(), xSpeed)*yThrottle, true);
     	robotDrive.arcadeDrive(ySpeed*yThrottle*sensitivity, xSpeed*yThrottle*sensitivity);
     	//System.out.println(ai.getVoltage());
     }
 
+    public void turnToHeading(double heading) {
+    	ahrs.zeroYaw();
+    	turnController.setSetpoint(heading);
+    	turnController.enable();
+    }
+    
     public void perfectDrive(double moveValue, double rotateValue){
         double leftMotorSpeed;
         double rightMotorSpeed;
@@ -134,34 +160,31 @@ public class DriveTrain extends PIDSubsystem {
     	//System.out.println("left: "+leftMotorSpeed+"--- right: "+rightMotorSpeed);
     }
     
-    public void rotate(int Goal, int Power){
-   	
-    }
-    
+   
     public double getRobotHeading(){
-    	return Robot.ahrs.getAngle();
+    	//return ahrs.getAngle();
+    	//return ahrs.getFusedHeading();
+    	return 0;
     }
     
-    public double getArmPosition(){
-    	return RobotMap.armMotor.getAnalogInPosition();
-    }
 
 	public void resetHeading() {
-		Robot.ahrs.reset();
-		// TODO Auto-generated method stub
-		
+		ahrs.reset();		
 	}
 
+	public void resetYaw() {
+		ahrs.zeroYaw();		
+	}
+	
 	@Override
 	protected double returnPIDInput() {
-		// TODO Auto-generated method stub
-		return 0;
+		return ahrs.getYaw();
 	}
 
+	
 	@Override
 	protected void usePIDOutput(double output) {
-		// TODO Auto-generated method stub
-		
+    	robotDrive.tankDrive(output, -output);
 	}
 }
 
