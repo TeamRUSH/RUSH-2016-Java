@@ -72,7 +72,8 @@ public class Robot extends IterativeRobot {
             Alternatively:  I2C.Port.kMXP, SerialPort.Port.kMXP or SerialPort.Port.kUSB     
             See http://navx-mxp.kauailabs.com/guidance/selecting-an-interface/ for details. */
             ahrs = new AHRS(SPI.Port.kMXP); 
-            SmartDashboard.putString("Nav X", "ENABLED!!!!!");
+            SmartDashboard.putString("Nav X", "ENABLED DUDE!!!!!");
+            //SmartDashboard.putNumber("Yaw: ", ahrs.getYaw());
             
         } catch (RuntimeException ex ) {
         	SmartDashboard.putString("Nav X", "Not Initialized");
