@@ -46,7 +46,7 @@ public class DriveTrain extends PIDSubsystem {
 
 	double sensitivity = 0.5;
 	
-	AHRS ahrs;
+	private AHRS ahrs;
 
 	//The turnController will use the NavX board (via ahrs object) as input.
 	//It will also use the built-in PIDController that comes with the PIDSubsyste.
@@ -58,7 +58,7 @@ public class DriveTrain extends PIDSubsystem {
     public DriveTrain()
     {
     	// super supplies the PID constants (.05, 0, 0)
-    	super("DriveTrain", .03, 0, 0);
+    	super("DriveTrain", .005, 0, 0);
     	
     	robotDrive = new RobotDrive(_leftMaster, _rightMaster);
   
@@ -164,7 +164,13 @@ public class DriveTrain extends PIDSubsystem {
     public double getRobotHeading(){
     	//return ahrs.getAngle();
     	//return ahrs.getFusedHeading();
-    	return 0;
+    	//return 0;
+        if (ahrs.isConnected()) {
+        	return ahrs.getYaw();
+        }
+        else {
+        	return 0;
+        }
     }
     
 
@@ -184,7 +190,7 @@ public class DriveTrain extends PIDSubsystem {
 	
 	@Override
 	protected void usePIDOutput(double output) {
-    	robotDrive.tankDrive(output, -output);
+    	robotDrive.tankDrive(-output, output);
 	}
 }
 
