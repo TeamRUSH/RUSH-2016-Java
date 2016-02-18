@@ -7,6 +7,7 @@ import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
  
 public class TurnHeading extends Command {
@@ -30,7 +31,8 @@ public class TurnHeading extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Math.abs(Robot.driveTrain.getRobotHeading() - requestedHeading) < .1;
+    	SmartDashboard.putNumber("Turn Error", Math.abs(Robot.driveTrain.getRobotHeading() - requestedHeading));
+        return Math.abs(Robot.driveTrain.getRobotHeading() - requestedHeading) < .25;
         
     }
 

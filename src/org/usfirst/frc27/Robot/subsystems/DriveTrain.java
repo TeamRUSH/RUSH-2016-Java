@@ -51,6 +51,7 @@ public class DriveTrain extends PIDSubsystem {
 	//The turnController will use the NavX board (via ahrs object) as input.
 	//It will also use the built-in PIDController that comes with the PIDSubsyste.
 	PIDController turnController;
+	private int turnRequests;
 	
 	//The distanceController will use an encoder connected to the robot wheels as input.
 	//PIDController distanceController = new PIDController(.03, 0, 0, );
@@ -58,7 +59,7 @@ public class DriveTrain extends PIDSubsystem {
     public DriveTrain()
     {
     	// super supplies the PID constants (.05, 0, 0)
-    	super("DriveTrain", .005, 0, 0);
+    	super("DriveTrain", .0098, .00002, 0);
     	
     	robotDrive = new RobotDrive(_leftMaster, _rightMaster);
   
@@ -81,6 +82,8 @@ public class DriveTrain extends PIDSubsystem {
        	//classes that extend PIDSubsystems.
        	turnController = getPIDController();
        	turnController.disable();
+       	turnController.setInputRange(-180,  180);
+       	turnController.setOutputRange(-.7, .7);
        	
     }
 
@@ -94,7 +97,7 @@ public class DriveTrain extends PIDSubsystem {
     } 
 
     public void stop(){
-    	turnController.disable();
+    	turnController.reset();
     	robotDrive.drive(0, 0);
     }
 
@@ -133,6 +136,7 @@ public class DriveTrain extends PIDSubsystem {
     	ahrs.zeroYaw();
     	turnController.setSetpoint(heading);
     	turnController.enable();
+    	SmartDashboard.putNumber("Turn Requests", turnRequests++);
     }
     
     public void perfectDrive(double moveValue, double rotateValue){
