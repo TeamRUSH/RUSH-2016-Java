@@ -59,7 +59,7 @@ public class DriveTrain extends PIDSubsystem {
     public DriveTrain()
     {
     	// super supplies the PID constants (.05, 0, 0)
-    	super("DriveTrain", .0098, .00002, 0);
+    	super("DriveTrain", .0070, .0003, 0);
     	
     	robotDrive = new RobotDrive(_leftMaster, _rightMaster);
   
