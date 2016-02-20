@@ -18,7 +18,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc27.Robot.Robot;
 import org.usfirst.frc27.Robot.commands.DriveTrain.Drive;
 import org.usfirst.frc27.Robot.commands.DriveTrain.Turn;
-import org.usfirst.frc27.Robot.commands.DriveTrain.TurnWithHeading;
+import org.usfirst.frc27.Robot.commands.DriveTrain.TurnToHeading;
 
 /**
  *
@@ -50,7 +50,7 @@ public class AutonomousForward extends CommandGroup {
     	
     	//Normal
     	//addSequential(new Drive(.4, 2));
-    	addSequential(new TurnWithHeading(0.5, 60, Robot.TURN_RIGHT));
+    	addSequential(new TurnToHeading(0.5, 60, Robot.TURN_RIGHT));
     	//addSequential(new TurnWithHeading(.5, 120, Robot.TURN_LEFT));
     	//addSequential(new Drive(-.4, 2));
     	

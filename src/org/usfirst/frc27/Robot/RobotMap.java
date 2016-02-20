@@ -69,7 +69,7 @@ public class RobotMap {
         shooterShooterWheel1 = new CANTalon(20);
         LiveWindow.addActuator("Shooter", "ShooterWheel1", shooterShooterWheel1);
         
-        shooterShooterWheel2 = new CANTalon(19);
+        shooterShooterWheel2 = new CANTalon(21);
         LiveWindow.addActuator("Shooter", "ShooterWheel2", shooterShooterWheel2);
         
         ballDeliveryBallDelivery1 = new DoubleSolenoid(2, 0, 1);

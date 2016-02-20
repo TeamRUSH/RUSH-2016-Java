@@ -9,11 +9,15 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
  
-public class TurnHeading extends Command {
+public class TurnFromHeading extends Command {
 	
 	double requestedHeading;
-	
-    public TurnHeading(double heading ) {
+	///////////////////////////////////////////////////////////////
+	//                                                           //
+	//*** Turns x degrees from current heading***                //
+	//                                                           //
+	///////////////////////////////////////////////////////////////
+    public TurnFromHeading(double heading ) {
         requires(Robot.driveTrain);
         requestedHeading = heading;
     }
@@ -30,7 +34,7 @@ public class TurnHeading extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Math.abs(Robot.driveTrain.getRobotHeading() - requestedHeading) < .1;
+        return Math.abs(Robot.driveTrain.getRobotHeading() - requestedHeading) < .5;
         
     }
 
