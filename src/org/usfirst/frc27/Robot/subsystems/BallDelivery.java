@@ -25,7 +25,7 @@ public class BallDelivery extends Subsystem {
 
    
     private final DoubleSolenoid ballDelivery1 = RobotMap.ballDeliveryBallDelivery1;
-    //private final DoubleSolenoid ballDelivery2 = RobotMap.ballDeliveryBallDelivery2;
+    private final DoubleSolenoid ballDelivery2 = RobotMap.ballDeliveryBallDelivery2;
     //private final DoubleSolenoid ballDelivery3 = RobotMap.ballDeliveryBallDelivery3;
 
    

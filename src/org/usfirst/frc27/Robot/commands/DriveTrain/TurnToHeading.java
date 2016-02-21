@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
  
-public class TurnWithHeading extends Command {
+public class TurnToHeading extends Command {
 
 	public double speed=0.00;
 	private double timeFinal = 0;
@@ -16,7 +16,12 @@ public class TurnWithHeading extends Command {
 	private double desiredHeading;
 	
 	
-    public TurnWithHeading(double power, double headTo, int turnDirection) {
+	///////////////////////////////////////////////////////////////
+	//                                                           //
+	//*** Turns to a certain degree out of 360***                //
+	//                                                           //
+	///////////////////////////////////////////////////////////////
+    public TurnToHeading(double power, double headTo, int turnDirection) {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.driveTrain);
         speed=power;
