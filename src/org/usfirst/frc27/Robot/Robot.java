@@ -16,6 +16,7 @@ import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.vision.*;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -39,7 +40,8 @@ import org.usfirst.frc27.Robot.subsystems.*;
  */
 public class Robot extends IterativeRobot {
 
-    Command autonomousCommand;
+	Preferences prefs;
+	Command autonomousCommand;
     SendableChooser autoChooser;
     
     //CameraServer server;
@@ -52,7 +54,10 @@ public class Robot extends IterativeRobot {
     public static final int TURN_LEFT = 0;
     public static final int TURN_RIGHT = 1;
     
-
+    private double driveTrainP;
+    private double driveTrainI;
+    private double driveTrainD;
+    
     public Robot() {
         try {
             /* Communicate w/navX MXP via the MXP SPI Bus.                                     
@@ -93,8 +98,11 @@ public class Robot extends IterativeRobot {
         //server.setQuality(50);
         //the camera name (ex "cam0") can be found through the roborio web interface
         //server.startAutomaticCapture("cam0");
-
-        // OI must be constructed after subsystems. If the OI creates Commands
+        prefs = Preferences.getInstance();
+		driveTrainP = prefs.getDouble("driveTrainP", 1.0);
+		driveTrainI = prefs.getDouble("driveTrainI", 1.0);
+		driveTrainD = prefs.getDouble("driveTrainD", 1.0);
+		// OI must be constructed after subsystems. If the OI creates Commands
         //(which it very likely will), subsystems are not guaranteed to be
         // constructed yet. Thus, their requires() statements may grab null
         // pointers. Bad news. Don't move it.
