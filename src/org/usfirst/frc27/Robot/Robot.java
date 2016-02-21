@@ -14,6 +14,7 @@ package org.usfirst.frc27.Robot;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.vision.*;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -21,7 +22,6 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.SPI;
-import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.DriverStation;
 import org.usfirst.frc27.Robot.commands.*;
 import org.usfirst.frc27.Robot.commands.Auton.AutonBrandon;
@@ -42,7 +42,7 @@ public class Robot extends IterativeRobot {
     Command autonomousCommand;
     SendableChooser autoChooser;
     
-    CameraServer server;
+    //CameraServer server;
     public static AHRS ahrs;
     public static OI oi;
     public static DriveTrain driveTrain;
@@ -51,6 +51,7 @@ public class Robot extends IterativeRobot {
     public static Arm arm;
     public static final int TURN_LEFT = 0;
     public static final int TURN_RIGHT = 1;
+    
 
     public Robot() {
         try {
@@ -88,10 +89,10 @@ public class Robot extends IterativeRobot {
         ballDelivery = new BallDelivery();
         arm = new Arm();
                 
-        server = CameraServer.getInstance();
-        server.setQuality(50);
+        //server = CameraServer.getInstance();
+        //server.setQuality(50);
         //the camera name (ex "cam0") can be found through the roborio web interface
-        server.startAutomaticCapture("cam0");
+        //server.startAutomaticCapture("cam0");
 
         // OI must be constructed after subsystems. If the OI creates Commands
         //(which it very likely will), subsystems are not guaranteed to be
