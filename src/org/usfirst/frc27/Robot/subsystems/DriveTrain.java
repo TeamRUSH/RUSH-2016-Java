@@ -18,14 +18,20 @@ import org.usfirst.frc27.Robot.commands.DriveTrain.DriveWithJoysticks;
 import org.usfirst.frc27.Robot.commands.DriveTrain.Turn;
 
 import com.kauailabs.navx.frc.AHRS;
+import com.ni.vision.NIVision;
+import com.ni.vision.NIVision.DrawMode;
+import com.ni.vision.NIVision.Image;
+import com.ni.vision.NIVision.ShapeMode;
 
 import org.usfirst.frc27.Robot.Robot;
 import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Joystick.AxisType;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -55,6 +61,17 @@ public class DriveTrain extends PIDSubsystem {
 	
 	//The distanceController will use an encoder connected to the robot wheels as input.
 	//PIDController distanceController = new PIDController(.03, 0, 0, );
+
+	
+//begin vision test	
+    //int session;
+    //Image frame;
+    //NIVision.RawData colorTable;
+    //CameraServer server;
+//end vision test 
+	
+	
+	
 	
     public DriveTrain()
     {
@@ -84,6 +101,17 @@ public class DriveTrain extends PIDSubsystem {
        	turnController.disable();
        	turnController.setInputRange(-180,  180);
        	turnController.setOutputRange(-.7, .7);
+       	
+       	
+       	//begin vision test
+       	
+        //frame = RobotMap.FRAME;
+        //session = RobotMap.CAMERA_SESSION;
+       // NIVision.IMAQdxConfigureGrab(session);
+       // colorTable = new NIVision.RawData();
+       	
+       	//end vision test
+       	
        	
     }
 
@@ -196,5 +224,36 @@ public class DriveTrain extends PIDSubsystem {
 	protected void usePIDOutput(double output) {
     	robotDrive.tankDrive(-output, output);
 	}
+	
+	
+	//begin image test
+   /* public void saveImage() {
+        NIVision.IMAQdxStartAcquisition(session);
+
+        /**
+         * grab an image, draw the circle, and provide it for the camera server
+         * which will in turn send it to the dashboard.
+         */
+	/*
+        NIVision.Rect rect = new NIVision.Rect(10, 10, 100, 100);
+        NIVision.IMAQdxGrab(session, frame, 1);
+        //NIVision.imaqWriteJPEGFile(frame, "/images/test.jpg", 200, colorTable);
+        SmartDashboard.putString("Vision", "StartAcquisition is ok");
+        NIVision.imaqDrawShapeOnImage(frame, frame, rect,
+           DrawMode.DRAW_VALUE, ShapeMode.SHAPE_OVAL, 0.0f);
+        SmartDashboard.putString("Vision", "Start Acq ok, draw on image ok");
+        CameraServer.getInstance().setImage(frame);
+        
+            //** robot code here!
+            Timer.delay(0.005);		// wait for a motor update time
+    }
+*/
+	//end image test
+	
+	
+	
+	
+	
+	
 }
 

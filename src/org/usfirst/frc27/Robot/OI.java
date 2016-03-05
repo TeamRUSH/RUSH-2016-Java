@@ -63,7 +63,7 @@ public class OI {
 	private JoystickButton logitech_button_A;
 
     public OI() {
-        leftJoystick = new Joystick(0);
+   /*     leftJoystick = new Joystick(0);
         rightJoystick = new Joystick(1);
         logitechPad = new Joystick(2);
         
@@ -96,10 +96,11 @@ public class OI {
         trigger_Right.whileHeld(new EnableShoot());
         button_X.whenPressed(new ArmToDrivePosition());
         button_B.whenPressed(new ArmToUpPosition());
-        button_Y.whenPressed(new TurnFromHeading(90));
+        //button_Y.whenPressed(new TurnFromHeading(90));
+   */
     }
 
-    
+  /*  
     public Joystick getLeftJoystick() {
         return leftJoystick;
     }
@@ -111,6 +112,6 @@ public class OI {
     public Joystick getLogitechPad() {
         return logitechPad;
     }    
+    */
     
 }
-

@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 /**
@@ -55,18 +56,20 @@ public class RobotMap {
     /*
      * Camera
      */   
-    public static final String CAM_ID = "cam1";
+    public static final String CAM_ID = "cam2";
     public static int camCounter = 0;
     public static final int IMAGE_QUALITY = 100;
     public static final int SAVE_IMAGE_QUALITY = 100;
     public static final String IMAGE_PATH = "/images/test.jpg";
     public static final int DISTANCE_CHANNEL = 0;
-    public static final int CAMERA_SESSION = NIVision.IMAQdxOpenCamera("cam0", NIVision.IMAQdxCameraControlMode.CameraControlModeController); 
+    public static final int CAMERA_SESSION = NIVision.IMAQdxOpenCamera(CAM_ID, NIVision.IMAQdxCameraControlMode.CameraControlModeController); 
     //this may need to change to "cam1" depending if using test board or multiple cameras
-    public static final Image FRAME = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
+    //public static final Image FRAME = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
     
 
     public static void init() {
+    	SmartDashboard.putNumber("Camera Session: ", CAMERA_SESSION);
+    	
         driveTrainLeftMotor1 = new CANTalon(12);
         LiveWindow.addActuator("DriveTrain", "LeftMotor1", driveTrainLeftMotor1);
         

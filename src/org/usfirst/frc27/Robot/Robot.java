@@ -51,6 +51,7 @@ public class Robot extends IterativeRobot {
     public static Shooter shooter;
     public static BallDelivery ballDelivery;
     public static Arm arm;
+    public static Vision vision;
     public static final int TURN_LEFT = 0;
     public static final int TURN_RIGHT = 1;
     
@@ -64,16 +65,7 @@ public class Robot extends IterativeRobot {
             Alternatively:  I2C.Port.kMXP, SerialPort.Port.kMXP or SerialPort.Port.kUSB     
             See http://navx-mxp.kauailabs.com/guidance/selecting-an-interface/ for details. */
             ahrs = new AHRS(SPI.Port.kMXP); 
-            SmartDashboard.putString("Nav X", "ENABLED DUDE 2 !!!!!");
-            if (ahrs == null){
-            	SmartDashboard.putString("Nav X Object Variable", "NULL!!!");
-            }
-            else {
-            	SmartDashboard.putString("Nav X Object Variable", "NOT NULL");
-            }
             	
-            SmartDashboard.putString("ahrs to string", ahrs.toString());
-            //SmartDashboard.putNumber("Yaw: ", ahrs.getYaw());
             SmartDashboard.putBoolean("isconnected", ahrs.isConnected());
             
         } catch (RuntimeException ex ) {
@@ -93,6 +85,7 @@ public class Robot extends IterativeRobot {
         shooter = new Shooter();
         ballDelivery = new BallDelivery();
         arm = new Arm();
+        vision = new Vision();
                 
         //server = CameraServer.getInstance();
         //server.setQuality(50);
@@ -113,11 +106,7 @@ public class Robot extends IterativeRobot {
         autoChooser.addDefault("Brandon's Auton", new AutonBrandon());
       //autoChooser.addDefault("(Program Name)", new (Program Name File)());
       //autoChooser.addDefault("(Program Name)", new (Program Name File)());
-      //autoChooser.addDefault("(Program Name)", new (Program Name File)());
-      //autoChooser.addDefault("(Program Name)", new (Program Name File)());
-      //autoChooser.addDefault("(Program Name)", new (Program Name File)());
-      //autoChooser.addDefault("(Program Name)", new (Program Name File)());
-      //autoChooser.addDefault("(Program Name)", new (Program Name File)());
+
         
         SmartDashboard.putData("Selected Auton", autoChooser);
 
