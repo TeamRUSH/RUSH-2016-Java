@@ -1,6 +1,6 @@
 
 
-package src.main.java.org.usfirst.frc27.robot;
+package org.usfirst.frc27.robot;
 
 import org.usfirst.frc27.robot.commands.*;
 import org.usfirst.frc27.robot.commands.Auton.AutonNoMovement;
