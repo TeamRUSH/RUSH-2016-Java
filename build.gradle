@@ -1,0 +1,67 @@
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'eclipse'
+apply plugin: 'GradleRIO'                                 //Apply the GradleRIO plugin
+apply plugin: 'maven'
+
+group = 'org.usfirst.frc27.robot'
+version = '1.0-SNAPSHOT'
+
+description = """stronghold"""
+
+sourceCompatibility = 1.5
+targetCompatibility = 1.5
+
+repositories {
+        
+     maven { url "file://" + projectDir + "/libs" }
+     maven { url "http://first.wpi.edu/FRC/roborio/maven/release" }
+     maven { url "http://repo.maven.apache.org/maven2" }
+}
+dependencies {
+    compile group: 'edu.wpi.first.wpilibj', name: 'wpilibJavaFinal', version:'0.1.0-SNAPSHOT'
+    compile group: 'com.kauailabs', name: 'navx_frc', version:'2016'
+}
+
+
+/**
+ Template file for classes using GradleRIO
+ @author Jaci
+ */
+
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            name = "GradleRIO"
+            url = "http://dev.imjac.in/maven"
+        }
+    }
+    dependencies {
+        classpath group: 'jaci.openrio.gradle', name: 'GradleRIO', version: '+'			//Change this line if you wish to Update GradleRIO
+    }
+}
+
+
+gradlerio.robotClass = "org.usfirst.frc27.Robot"   //The class for the main Robot Class. Used in manifest
+gradlerio.team = "27"                                   //Your FRC team number (e.g. 5333 for team 'Can't C#', or 47 for Chief Delphi)
+//gradlerio.rioIP = "10.53.33.20"                         //Uncomment to specify the IP address of the RIO
+
+def robotManifest = {
+    attributes 'Main-Class': 'edu.wpi.first.wpilibj.RobotBase'
+    attributes 'Robot-Class': gradlerio.robotClass
+}
+
+jar {
+    from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    manifest robotManifest
+}
+
+task genJavadoc(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives genJavadoc
+}
